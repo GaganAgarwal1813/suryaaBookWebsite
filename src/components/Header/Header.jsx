@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { scrollToElement } from '../../utils/scrollToElement';
@@ -9,10 +10,27 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
   const { cartItemCount } = useCart();
   const { currentUser, logout, isAdmin } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavClick = (sectionId) => {
-    scrollToElement(sectionId);
     setIsMenuOpen(false);
+    if (location.pathname === '/') {
+      // Already on home page — just scroll to the section
+      scrollToElement(sectionId);
+    } else {
+      // On another page — navigate home, then scroll after a brief delay
+      navigate('/');
+      setTimeout(() => scrollToElement(sectionId), 100);
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
   };
 
   const handleLogout = async () => {
@@ -35,7 +53,7 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
   return (
     <header className="header">
       <div className="header-container">
-        <div className="logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <div className="logo" onClick={handleLogoClick}>
           <span className="logo-icon">📓</span>
           <span className="logo-text">Suryaa Book Depot</span>
         </div>

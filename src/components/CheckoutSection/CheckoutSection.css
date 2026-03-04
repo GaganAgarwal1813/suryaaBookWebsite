@@ -72,6 +72,23 @@
   margin: 0.5rem 0;
 }
 
+.continue-shopping-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  border: 2px solid white;
+  border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.continue-shopping-link:hover {
+  background-color: white;
+  color: #45a049;
+}
+
 .login-prompt {
   background-color: var(--color-bg-cream);
   border: 2px solid var(--color-primary);

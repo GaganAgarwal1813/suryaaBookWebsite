@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { useFormData } from '../../hooks/useFormData';
-import { scrollToElement } from '../../utils/scrollToElement';
 import { ORDERS_COLLECTION, formatCurrency, lineTotal } from '../../utils/orderUtils';
 import './CheckoutSection.css';
 
@@ -75,7 +75,7 @@ const CheckoutSection = ({ onLoginClick }) => {
       setOrderPlaced(true);
       clearCart();
       resetForm();
-      scrollToElement('checkout');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       console.error('Error saving order:', err);
       setError('Failed to place order. Please check your connection and try again.');
@@ -100,6 +100,9 @@ const CheckoutSection = ({ onLoginClick }) => {
               </p>
             )}
             <p>You can track your order from the 📦 My Orders page.</p>
+            <Link to="/" className="continue-shopping-link">
+              ← Continue Shopping
+            </Link>
           </div>
         )}
 
@@ -118,92 +121,94 @@ const CheckoutSection = ({ onLoginClick }) => {
           </div>
         )}
 
-        <div className="checkout-content">
-          <div className="order-summary">
-            <h3>Order Summary</h3>
-            {cartItems.length === 0 ? (
-              <p className="empty-message">No items in cart</p>
-            ) : (
-              <>
-                <div className="summary-items">
-                  {cartItems.map(item => (
-                    <div key={item.id} className="summary-item">
-                      <span className="summary-item-name">{item.name} × {item.quantity}</span>
-                      <span className="summary-item-price">{formatCurrency(lineTotal(item))}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="summary-total">
-                  <span className="total-label">Total Amount:</span>
-                  <span className="total-value">{formatCurrency(cartTotal)}</span>
-                </div>
-              </>
-            )}
-          </div>
+        {!orderPlaced && (
+          <div className="checkout-content">
+            <div className="order-summary">
+              <h3>Order Summary</h3>
+              {cartItems.length === 0 ? (
+                <p className="empty-message">No items in cart</p>
+              ) : (
+                <>
+                  <div className="summary-items">
+                    {cartItems.map(item => (
+                      <div key={item.id} className="summary-item">
+                        <span className="summary-item-name">{item.name} × {item.quantity}</span>
+                        <span className="summary-item-price">{formatCurrency(lineTotal(item))}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="summary-total">
+                    <span className="total-label">Total Amount:</span>
+                    <span className="total-value">{formatCurrency(cartTotal)}</span>
+                  </div>
+                </>
+              )}
+            </div>
 
-          <form className="checkout-form" onSubmit={handleSubmit}>
-            <h3>Delivery Information</h3>
-            <div className="form-group">
-              <label htmlFor="name">Full Name *</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                placeholder="Enter your full name"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email Address *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                placeholder="Enter your email"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="phone">Phone Number *</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                placeholder="Enter your phone number"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="address">Delivery Address *</label>
-              <textarea
-                id="address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                required
-                rows="4"
-                placeholder="Enter your complete delivery address"
-              />
-            </div>
-            <button
-              type="submit"
-              className="place-order-btn"
-              disabled={cartItems.length === 0 || isSubmitting}
-            >
-              {!currentUser
-                ? 'Login to Place Order'
-                : isSubmitting
-                  ? 'Placing Order...'
-                  : 'Place Order'}
-            </button>
-          </form>
-        </div>
+            <form className="checkout-form" onSubmit={handleSubmit}>
+              <h3>Delivery Information</h3>
+              <div className="form-group">
+                <label htmlFor="name">Full Name *</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Enter your full name"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email Address *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">Phone Number *</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  placeholder="Enter your phone number"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="address">Delivery Address *</label>
+                <textarea
+                  id="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  required
+                  rows="4"
+                  placeholder="Enter your complete delivery address"
+                />
+              </div>
+              <button
+                type="submit"
+                className="place-order-btn"
+                disabled={cartItems.length === 0 || isSubmitting}
+              >
+                {!currentUser
+                  ? 'Login to Place Order'
+                  : isSubmitting
+                    ? 'Placing Order...'
+                    : 'Place Order'}
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </section>
   );

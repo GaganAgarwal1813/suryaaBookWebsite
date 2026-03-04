@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
-import { scrollToElement } from '../../utils/scrollToElement';
 import { formatCurrency } from '../../utils/orderUtils';
 import CartItem from '../CartItem/CartItem';
 import './CartSidebar.css';
 
 const CartSidebar = ({ isOpen, onClose }) => {
   const { cartItems, cartTotal } = useCart();
+  const navigate = useNavigate();
 
   const handleProceedToCheckout = () => {
     onClose();
-    scrollToElement('checkout');
+    navigate('/checkout');
   };
 
   if (!isOpen) return null;
