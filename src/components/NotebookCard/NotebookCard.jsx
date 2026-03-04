@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useCart } from '../../context/CartContext';
 import './NotebookCard.css';
 
@@ -50,6 +51,20 @@ const NotebookCard = ({ product }) => {
       </div>
     </div>
   );
+};
+
+NotebookCard.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    mrp: PropTypes.number,
+    pages: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    gsm: PropTypes.string,
+    frontImage: PropTypes.string.isRequired,
+    backImage: PropTypes.string.isRequired,
+    category: PropTypes.string
+  }).isRequired
 };
 
 export default NotebookCard;

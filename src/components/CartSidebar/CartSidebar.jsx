@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types';
 import { useCart } from '../../context/CartContext';
+import { scrollToElement } from '../../utils/scrollToElement';
+import { formatCurrency } from '../../utils/orderUtils';
 import CartItem from '../CartItem/CartItem';
 import './CartSidebar.css';
 
@@ -7,10 +10,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
 
   const handleProceedToCheckout = () => {
     onClose();
-    const checkoutSection = document.getElementById('checkout');
-    if (checkoutSection) {
-      checkoutSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToElement('checkout');
   };
 
   if (!isOpen) return null;
@@ -40,7 +40,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
               <div className="cart-footer">
                 <div className="cart-total">
                   <span className="total-label">Total:</span>
-                  <span className="total-amount">₹{cartTotal.toFixed(2)}</span>
+                  <span className="total-amount">{formatCurrency(cartTotal)}</span>
                 </div>
                 <button 
                   className="checkout-btn"
@@ -55,6 +55,11 @@ const CartSidebar = ({ isOpen, onClose }) => {
       </div>
     </>
   );
+};
+
+CartSidebar.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired
 };
 
 export default CartSidebar;

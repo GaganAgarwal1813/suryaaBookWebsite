@@ -1,7 +1,7 @@
 .notebook-card {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(123, 63, 0, 0.1);
+  box-shadow: 0 4px 12px var(--shadow-brand-sm);
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
   display: flex;
@@ -10,14 +10,14 @@
 
 .notebook-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(123, 63, 0, 0.2);
+  box-shadow: 0 8px 20px var(--shadow-brand-md);
 }
 
 .card-images {
   display: flex;
   gap: 0.5rem;
   padding: 1rem;
-  background: #FDF6EC;
+  background: var(--color-bg-cream);
 }
 
 .card-image {
@@ -25,7 +25,7 @@
   height: 200px;
   object-fit: cover;
   border-radius: 8px;
-  border: 2px solid #C47B2B;
+  border: 2px solid var(--color-primary);
 }
 
 .card-details {
@@ -39,7 +39,7 @@
 .card-name {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #7B3F00;
+  color: var(--color-primary-dark);
   margin: 0;
 }
 
@@ -51,8 +51,8 @@
 
 .spec-item {
   font-size: 0.9rem;
-  color: #666;
-  background: #FDF6EC;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-cream);
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
 }
@@ -63,7 +63,7 @@
   align-items: center;
   margin-top: auto;
   padding-top: 1rem;
-  border-top: 1px solid #FDF6EC;
+  border-top: 1px solid var(--color-bg-cream);
 }
 
 .price-group {
@@ -76,12 +76,12 @@
 .selling-price {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #C47B2B;
+  color: var(--color-primary);
 }
 
 .mrp {
   font-size: 1rem;
-  color: #999;
+  color: var(--color-text-light);
   text-decoration: line-through;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .add-to-cart-btn {
-  background-color: #C47B2B;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -110,7 +110,7 @@
 }
 
 .add-to-cart-btn:hover {
-  background-color: #7B3F00;
+  background-color: var(--color-primary-dark);
   transform: scale(1.05);
 }
 

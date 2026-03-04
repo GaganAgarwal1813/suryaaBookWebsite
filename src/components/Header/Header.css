@@ -1,8 +1,8 @@
 .header {
   position: sticky;
   top: 0;
-  background-color: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(123, 63, 0, 0.1);
+  background-color: var(--color-white);
+  box-shadow: 0 2px 8px var(--shadow-brand-sm);
   z-index: 1000;
   padding: 1rem 0;
 }
@@ -36,7 +36,7 @@
 .logo-text {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #7B3F00;
+  color: var(--color-primary-dark);
 }
 
 .nav {
@@ -49,7 +49,7 @@
 .nav button {
   background: none;
   border: none;
-  color: #7B3F00;
+  color: var(--color-primary-dark);
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -59,8 +59,8 @@
 }
 
 .nav button:hover {
-  background-color: #FDF6EC;
-  color: #C47B2B;
+  background-color: var(--color-bg-cream);
+  color: var(--color-primary);
 }
 
 .header-actions {
@@ -87,7 +87,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #C47B2B;
+  background-color: var(--color-primary);
   color: white;
   border-radius: 50%;
   width: 20px;
@@ -105,7 +105,7 @@
 }
 
 .user-greeting {
-  color: #7B3F00;
+  color: var(--color-primary-dark);
   font-weight: 500;
   font-size: 0.95rem;
   white-space: nowrap;
@@ -122,17 +122,17 @@
 }
 
 .header-action-btn:hover {
-  background-color: #FDF6EC;
+  background-color: var(--color-bg-cream);
   transform: scale(1.1);
 }
 
 .admin-btn {
-  background-color: #FDF6EC;
+  background-color: var(--color-bg-cream);
   border-radius: 6px;
 }
 
 .login-btn {
-  background-color: #C47B2B;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   padding: 0.5rem 1.25rem;
@@ -145,13 +145,13 @@
 }
 
 .login-btn:hover {
-  background-color: #7B3F00;
+  background-color: var(--color-primary-dark);
 }
 
 .logout-btn {
   background: none;
-  border: 2px solid #C47B2B;
-  color: #C47B2B;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
   padding: 0.4rem 1rem;
   border-radius: 6px;
   font-size: 0.9rem;
@@ -162,7 +162,7 @@
 }
 
 .logout-btn:hover {
-  background-color: #C47B2B;
+  background-color: var(--color-primary);
   color: white;
 }
 
@@ -172,7 +172,7 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #7B3F00;
+  color: var(--color-primary-dark);
 }
 
 @media (max-width: 768px) {
@@ -185,10 +185,10 @@
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #FFFFFF;
+    background-color: var(--color-white);
     flex-direction: column;
     padding: 1rem;
-    box-shadow: 0 4px 8px rgba(123, 63, 0, 0.1);
+    box-shadow: 0 4px 8px var(--shadow-brand-sm);
     transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;

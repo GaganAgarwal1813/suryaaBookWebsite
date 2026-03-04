@@ -1,4 +1,27 @@
 :root {
+  /* Brand colors */
+  --color-primary: #C47B2B;
+  --color-primary-dark: #7B3F00;
+  --color-bg-cream: #FDF6EC;
+  --color-white: #FFFFFF;
+  --color-text: #213547;
+  --color-text-muted: #888;
+  --color-text-secondary: #666;
+  --color-text-light: #999;
+  --color-border: #e0d5c8;
+  --color-error: #cc0000;
+  --color-error-bg: #fff0f0;
+  --color-error-border: #ffcccc;
+  --color-success: #4CAF50;
+
+  /* Shadows */
+  --shadow-brand-sm: rgba(123, 63, 0, 0.1);
+  --shadow-brand-md: rgba(123, 63, 0, 0.2);
+  --shadow-brand-lg: rgba(123, 63, 0, 0.3);
+  --shadow-primary-light: rgba(196, 123, 43, 0.2);
+  --shadow-primary-lighter: rgba(196, 123, 43, 0.15);
+
+  /* Typography */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -6,8 +29,8 @@
   font-weight: 400;
 
   color-scheme: light;
-  color: #213547;
-  background-color: #FDF6EC;
+  color: var(--color-text);
+  background-color: var(--color-bg-cream);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

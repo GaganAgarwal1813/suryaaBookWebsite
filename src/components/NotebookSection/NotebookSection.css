@@ -1,10 +1,10 @@
 .notebook-section {
   padding: 4rem 2rem;
-  background-color: #FDF6EC;
+  background-color: var(--color-bg-cream);
 }
 
 .notebook-section:nth-child(even) {
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
 }
 
 .section-container {
@@ -14,7 +14,7 @@
 
 .section-title {
   font-size: 2.5rem;
-  color: #7B3F00;
+  color: var(--color-primary-dark);
   margin-bottom: 2rem;
   text-align: center;
   font-weight: bold;

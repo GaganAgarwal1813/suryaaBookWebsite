@@ -1,83 +1,20 @@
-.admin-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: adminFadeIn 0.3s;
-}
+/* AdminDashboard-specific styles (overlay, header, close btn handled by Modal) */
 
-@keyframes adminFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.admin-panel {
-  background: white;
-  border-radius: 16px;
-  width: 95%;
-  max-width: 900px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 20px 60px rgba(123, 63, 0, 0.3);
-  animation: adminSlideUp 0.3s ease-out;
-}
-
-@keyframes adminSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.admin-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  border-bottom: 2px solid #FDF6EC;
-}
-
-.admin-header h2 {
-  margin: 0;
-  color: #7B3F00;
-  font-size: 1.5rem;
-}
-
-.admin-close-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #7B3F00;
-  cursor: pointer;
-  padding: 0;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-
-.admin-close-btn:hover {
-  background-color: #FDF6EC;
+.admin-error {
+  background-color: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-error);
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  font-weight: 500;
 }
 
 .admin-stats {
   display: flex;
   gap: 0.5rem;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #FDF6EC;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid var(--color-bg-cream);
   flex-wrap: wrap;
 }
 
@@ -86,7 +23,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  border: 2px solid #e0d5c8;
+  border: 2px solid var(--color-border);
   border-radius: 20px;
   background: white;
   cursor: pointer;
@@ -95,12 +32,12 @@
 }
 
 .stat-pill:hover {
-  border-color: #C47B2B;
+  border-color: var(--color-primary);
 }
 
 .stat-pill-active {
-  background-color: #C47B2B;
-  border-color: #C47B2B;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
   color: white;
 }
 
@@ -123,15 +60,13 @@
 }
 
 .admin-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1.5rem 2rem;
+  padding-top: 1rem;
 }
 
 .admin-loading,
 .admin-empty {
   text-align: center;
-  color: #888;
+  color: var(--color-text-muted);
   padding: 3rem;
   font-size: 1.1rem;
 }
@@ -143,10 +78,10 @@
 }
 
 .admin-order-card {
-  background: #FDF6EC;
+  background: var(--color-bg-cream);
   border-radius: 12px;
   padding: 1.25rem;
-  border: 1px solid rgba(196, 123, 43, 0.15);
+  border: 1px solid var(--shadow-primary-lighter);
 }
 
 .admin-order-row {
@@ -165,13 +100,13 @@
 
 .admin-order-id {
   font-weight: 700;
-  color: #7B3F00;
+  color: var(--color-primary-dark);
   font-size: 1rem;
 }
 
 .admin-order-date {
   font-size: 0.8rem;
-  color: #888;
+  color: var(--color-text-muted);
   margin-top: 0.2rem;
 }
 
@@ -183,13 +118,13 @@
 
 .admin-status-control label {
   font-weight: 600;
-  color: #7B3F00;
+  color: var(--color-primary-dark);
   font-size: 0.9rem;
 }
 
 .status-select {
   padding: 0.4rem 0.75rem;
-  border: 2px solid #C47B2B;
+  border: 2px solid var(--color-primary);
   border-radius: 8px;
   font-size: 0.9rem;
   font-family: inherit;
@@ -200,7 +135,7 @@
 
 .status-select:focus {
   outline: none;
-  border-color: #7B3F00;
+  border-color: var(--color-primary-dark);
 }
 
 .status-select-pending { color: #856404; }
@@ -219,11 +154,11 @@
 }
 
 .admin-customer strong {
-  color: #7B3F00;
+  color: var(--color-primary-dark);
 }
 
 .admin-items {
-  border-top: 1px solid rgba(196, 123, 43, 0.15);
+  border-top: 1px solid var(--shadow-primary-lighter);
   padding-top: 0.75rem;
 }
 
@@ -238,25 +173,16 @@
 .admin-order-total {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(196, 123, 43, 0.15);
+  border-top: 1px solid var(--shadow-primary-lighter);
   font-weight: 700;
   font-size: 1.1rem;
-  color: #C47B2B;
+  color: var(--color-primary);
   text-align: right;
 }
 
 @media (max-width: 600px) {
-  .admin-panel {
-    width: 98%;
-    max-height: 95vh;
-  }
-
-  .admin-content {
-    padding: 1rem;
-  }
-
   .admin-stats {
-    padding: 0.75rem 1rem;
+    padding: 0 0 0.75rem;
   }
 
   .admin-order-row {

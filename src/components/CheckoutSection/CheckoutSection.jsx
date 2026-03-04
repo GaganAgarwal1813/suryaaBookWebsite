@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
+import { useFormData } from '../../hooks/useFormData';
+import { scrollToElement } from '../../utils/scrollToElement';
+import { ORDERS_COLLECTION, formatCurrency, lineTotal } from '../../utils/orderUtils';
 import './CheckoutSection.css';
+
+const INITIAL_FORM = { name: '', email: '', phone: '', address: '' };
 
 const CheckoutSection = ({ onLoginClick }) => {
   const { cartItems, cartTotal, clearCart } = useCart();
   const { currentUser } = useAuth();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: ''
-  });
+  const { formData, setFormData, handleChange, resetForm } = useFormData(INITIAL_FORM);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderId, setOrderId] = useState(null);
@@ -28,14 +29,7 @@ const CheckoutSection = ({ onLoginClick }) => {
         email: currentUser.email || prev.email
       }));
     }
-  }, [currentUser]);
-
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  }, [currentUser, setFormData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +40,7 @@ const CheckoutSection = ({ onLoginClick }) => {
     }
 
     if (cartItems.length === 0) {
-      alert('Your cart is empty!');
+      setError('Your cart is empty! Please add items before placing an order.');
       return;
     }
 
@@ -68,7 +62,7 @@ const CheckoutSection = ({ onLoginClick }) => {
         category: item.category,
         price: item.price,
         quantity: item.quantity,
-        lineTotal: item.price * item.quantity
+        lineTotal: lineTotal(item)
       })),
       totalAmount: cartTotal,
       status: 'pending',
@@ -76,13 +70,12 @@ const CheckoutSection = ({ onLoginClick }) => {
     };
 
     try {
-      const docRef = await addDoc(collection(db, 'orders'), order);
+      const docRef = await addDoc(collection(db, ORDERS_COLLECTION), order);
       setOrderId(docRef.id);
       setOrderPlaced(true);
       clearCart();
-      setFormData({ name: '', email: '', phone: '', address: '' });
-      const el = document.getElementById('checkout');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      resetForm();
+      scrollToElement('checkout');
     } catch (err) {
       console.error('Error saving order:', err);
       setError('Failed to place order. Please check your connection and try again.');
@@ -136,13 +129,13 @@ const CheckoutSection = ({ onLoginClick }) => {
                   {cartItems.map(item => (
                     <div key={item.id} className="summary-item">
                       <span className="summary-item-name">{item.name} × {item.quantity}</span>
-                      <span className="summary-item-price">₹{(item.price * item.quantity).toFixed(2)}</span>
+                      <span className="summary-item-price">{formatCurrency(lineTotal(item))}</span>
                     </div>
                   ))}
                 </div>
                 <div className="summary-total">
                   <span className="total-label">Total Amount:</span>
-                  <span className="total-value">₹{cartTotal.toFixed(2)}</span>
+                  <span className="total-value">{formatCurrency(cartTotal)}</span>
                 </div>
               </>
             )}
@@ -157,7 +150,7 @@ const CheckoutSection = ({ onLoginClick }) => {
                 id="name"
                 name="name"
                 value={formData.name}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 required
                 placeholder="Enter your full name"
               />
@@ -169,7 +162,7 @@ const CheckoutSection = ({ onLoginClick }) => {
                 id="email"
                 name="email"
                 value={formData.email}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 required
                 placeholder="Enter your email"
               />
@@ -181,7 +174,7 @@ const CheckoutSection = ({ onLoginClick }) => {
                 id="phone"
                 name="phone"
                 value={formData.phone}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 required
                 placeholder="Enter your phone number"
               />
@@ -192,7 +185,7 @@ const CheckoutSection = ({ onLoginClick }) => {
                 id="address"
                 name="address"
                 value={formData.address}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 required
                 rows="4"
                 placeholder="Enter your complete delivery address"
@@ -214,6 +207,10 @@ const CheckoutSection = ({ onLoginClick }) => {
       </div>
     </section>
   );
+};
+
+CheckoutSection.propTypes = {
+  onLoginClick: PropTypes.func.isRequired
 };
 
 export default CheckoutSection;

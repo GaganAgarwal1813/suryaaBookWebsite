@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
+import { scrollToElement } from '../../utils/scrollToElement';
 import './Header.css';
 
 const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) => {
@@ -8,11 +10,8 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
   const { currentUser, logout, isAdmin } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleNavClick = (sectionId) => {
+    scrollToElement(sectionId);
     setIsMenuOpen(false);
   };
 
@@ -24,6 +23,15 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
     }
   };
 
+  const cartButton = (
+    <button className="cart-button" onClick={onCartClick}>
+      <span className="cart-icon">🛒</span>
+      {cartItemCount > 0 && (
+        <span className="cart-badge">{cartItemCount}</span>
+      )}
+    </button>
+  );
+
   return (
     <header className="header">
       <div className="header-container">
@@ -33,8 +41,8 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
         </div>
 
         <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
-          <button onClick={() => scrollToSection('regular')}>Regular</button>
-          <button onClick={() => scrollToSection('register')}>Register</button>
+          <button onClick={() => handleNavClick('regular')}>Regular</button>
+          <button onClick={() => handleNavClick('register')}>Register</button>
         </nav>
 
         <div className="header-actions">
@@ -53,24 +61,14 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
                   ⚙️
                 </button>
               )}
-              <button className="cart-button" onClick={onCartClick}>
-                <span className="cart-icon">🛒</span>
-                {cartItemCount > 0 && (
-                  <span className="cart-badge">{cartItemCount}</span>
-                )}
-              </button>
+              {cartButton}
               <button className="logout-btn" onClick={handleLogout}>
                 Logout
               </button>
             </>
           ) : (
             <>
-              <button className="cart-button" onClick={onCartClick}>
-                <span className="cart-icon">🛒</span>
-                {cartItemCount > 0 && (
-                  <span className="cart-badge">{cartItemCount}</span>
-                )}
-              </button>
+              {cartButton}
               <button className="login-btn" onClick={onLoginClick}>
                 Login
               </button>
@@ -87,6 +85,13 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  onCartClick: PropTypes.func.isRequired,
+  onLoginClick: PropTypes.func.isRequired,
+  onMyOrdersClick: PropTypes.func.isRequired,
+  onAdminClick: PropTypes.func.isRequired
 };
 
 export default Header;

@@ -1,22 +1,22 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useAuth } from '../../context/AuthContext';
+import { useFormData } from '../../hooks/useFormData';
 import './AuthModal.css';
+
+const INITIAL_FORM = { name: '', email: '', password: '' };
 
 const AuthModal = ({ isOpen, onClose }) => {
   const { loginWithEmail, registerWithEmail, loginWithGoogle } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: ''
-  });
+  const { formData, handleChange, resetForm } = useFormData(INITIAL_FORM);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
 
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    handleChange(e);
     setError(null);
   };
 
@@ -36,7 +36,7 @@ const AuthModal = ({ isOpen, onClose }) => {
         }
         await registerWithEmail(formData.name, formData.email, formData.password);
       }
-      setFormData({ name: '', email: '', password: '' });
+      resetForm();
       onClose();
     } catch (err) {
       console.error('Auth error:', err);
@@ -73,7 +73,7 @@ const AuthModal = ({ isOpen, onClose }) => {
   const toggleMode = () => {
     setIsLogin(!isLogin);
     setError(null);
-    setFormData({ name: '', email: '', password: '' });
+    resetForm();
   };
 
   return (
@@ -162,6 +162,11 @@ const AuthModal = ({ isOpen, onClose }) => {
       </div>
     </>
   );
+};
+
+AuthModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired
 };
 
 export default AuthModal;

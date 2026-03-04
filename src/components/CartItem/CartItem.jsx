@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import { useCart } from '../../context/CartContext';
+import { formatCurrency, lineTotal } from '../../utils/orderUtils';
 import './CartItem.css';
 
 const CartItem = ({ item }) => {
@@ -16,7 +18,7 @@ const CartItem = ({ item }) => {
     <div className="cart-item">
       <div className="cart-item-info">
         <h4 className="cart-item-name">{item.name}</h4>
-        <p className="cart-item-price">₹{item.price} each</p>
+        <p className="cart-item-price">{formatCurrency(item.price)} each</p>
       </div>
       <div className="cart-item-controls">
         <div className="quantity-controls">
@@ -35,7 +37,7 @@ const CartItem = ({ item }) => {
           </button>
         </div>
         <div className="cart-item-total">
-          ₹{(item.price * item.quantity).toFixed(2)}
+          {formatCurrency(lineTotal(item))}
         </div>
         <button 
           className="remove-btn"
@@ -47,6 +49,15 @@ const CartItem = ({ item }) => {
       </div>
     </div>
   );
+};
+
+CartItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    quantity: PropTypes.number.isRequired
+  }).isRequired
 };
 
 export default CartItem;

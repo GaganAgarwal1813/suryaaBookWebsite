@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { getProductsByCategory } from '../../data/products';
 import NotebookCard from '../NotebookCard/NotebookCard';
 import './NotebookSection.css';
@@ -17,6 +18,11 @@ const NotebookSection = ({ category, sectionId }) => {
       </div>
     </section>
   );
+};
+
+NotebookSection.propTypes = {
+  category: PropTypes.string.isRequired,
+  sectionId: PropTypes.string.isRequired
 };
 
 export default NotebookSection;

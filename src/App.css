@@ -6,7 +6,7 @@
 
 .App {
   min-height: 100vh;
-  background-color: #FDF6EC;
+  background-color: var(--color-bg-cream);
 }
 
 /* Smooth scrolling */
@@ -20,14 +20,14 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #FDF6EC;
+  background: var(--color-bg-cream);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C47B2B;
+  background: var(--color-primary);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #7B3F00;
+  background: var(--color-primary-dark);
 }

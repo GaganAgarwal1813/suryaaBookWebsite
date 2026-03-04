@@ -1,93 +1,14 @@
-.order-history-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: ohFadeIn 0.3s;
-}
-
-@keyframes ohFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.order-history-panel {
-  background: white;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 700px;
-  max-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 20px 60px rgba(123, 63, 0, 0.3);
-  animation: ohSlideUp 0.3s ease-out;
-}
-
-@keyframes ohSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.oh-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  border-bottom: 2px solid #FDF6EC;
-}
-
-.oh-header h2 {
-  margin: 0;
-  color: #7B3F00;
-  font-size: 1.5rem;
-}
-
-.oh-close-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #7B3F00;
-  cursor: pointer;
-  padding: 0;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-
-.oh-close-btn:hover {
-  background-color: #FDF6EC;
-}
-
-.oh-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1.5rem 2rem;
-}
+/* OrderHistory-specific styles (overlay, header, close btn handled by Modal) */
 
 .oh-loading {
   text-align: center;
-  color: #888;
+  color: var(--color-text-muted);
   padding: 3rem;
 }
 
 .oh-empty {
   text-align: center;
-  color: #888;
+  color: var(--color-text-muted);
   padding: 3rem;
 }
 
@@ -105,10 +26,10 @@
 }
 
 .oh-order-card {
-  background: #FDF6EC;
+  background: var(--color-bg-cream);
   border-radius: 12px;
   padding: 1.5rem;
-  border: 1px solid rgba(196, 123, 43, 0.2);
+  border: 1px solid var(--shadow-primary-light);
 }
 
 .oh-order-top {
@@ -123,14 +44,14 @@
 .oh-order-id {
   display: block;
   font-weight: 700;
-  color: #7B3F00;
+  color: var(--color-primary-dark);
   font-size: 1rem;
 }
 
 .oh-order-date {
   display: block;
   font-size: 0.85rem;
-  color: #888;
+  color: var(--color-text-muted);
   margin-top: 0.25rem;
 }
 
@@ -190,25 +111,25 @@
 }
 
 .oh-step-completed .oh-step-dot {
-  background-color: #C47B2B;
-  border-color: #C47B2B;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .oh-step-active .oh-step-dot {
-  background-color: #C47B2B;
-  border-color: #7B3F00;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary-dark);
   box-shadow: 0 0 0 4px rgba(196, 123, 43, 0.3);
 }
 
 .oh-step-label {
   font-size: 0.75rem;
-  color: #999;
+  color: var(--color-text-light);
   margin-top: 0.5rem;
   text-align: center;
 }
 
 .oh-step-completed .oh-step-label {
-  color: #7B3F00;
+  color: var(--color-primary-dark);
   font-weight: 600;
 }
 
@@ -223,12 +144,12 @@
 }
 
 .oh-step-completed .oh-step-line {
-  background-color: #C47B2B;
+  background-color: var(--color-primary);
 }
 
 /* Order Items */
 .oh-order-items {
-  border-top: 1px solid rgba(196, 123, 43, 0.2);
+  border-top: 1px solid var(--shadow-primary-light);
   padding-top: 1rem;
   margin-top: 0.5rem;
 }
@@ -246,22 +167,13 @@
   justify-content: space-between;
   margin-top: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(196, 123, 43, 0.2);
+  border-top: 1px solid var(--shadow-primary-light);
   font-weight: 700;
   font-size: 1.1rem;
-  color: #C47B2B;
+  color: var(--color-primary);
 }
 
 @media (max-width: 600px) {
-  .order-history-panel {
-    width: 95%;
-    max-height: 90vh;
-  }
-
-  .oh-content {
-    padding: 1rem;
-  }
-
   .oh-step-label {
     font-size: 0.65rem;
   }
