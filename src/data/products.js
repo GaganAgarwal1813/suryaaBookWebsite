@@ -1,5 +1,71 @@
-import regularFront from '../assets/Notebook58GSM/Hindi/front.jpeg';
-import regularBack from '../assets/Notebook58GSM/Hindi/back.jpeg';
+import cover1Front from '../assets/Notebook58GSM/Hindi/front.jpeg';
+import cover1Back from '../assets/Notebook58GSM/Hindi/back.jpeg';
+import cover2Front from '../assets/Notebook58GSM/Hindi/front_1.jpeg';
+import cover2Back from '../assets/Notebook58GSM/Hindi/back_1.jpeg';
+import gsm64Front from '../assets/Notebook64GSM/front.jpeg';
+import gsm64Back from '../assets/Notebook64GSM/back.jpeg';
+import gsm64Cover2Front from '../assets/Notebook64GSM/front_1.jpeg';
+import gsm64Cover2Back from '../assets/Notebook64GSM/back_1.jpeg';
+import gsm64Cover3Front from '../assets/Notebook64GSM/front_2.jpeg';
+import gsm64Cover3Back from '../assets/Notebook64GSM/back_2.jpeg';
+
+// --- Regular Notebook configuration ---
+const gsmTypes = ['64 GSM', '58 GSM'];
+const covers = ['Cover 1', 'Cover 2', 'Cover 3'];
+const subjects = ['Hindi', 'English', 'Math'];
+const pageVariants58 = [
+  { pages: 104, mrp: 36, price: 18 },
+  { pages: 132, mrp: 46, price: 23 },
+  { pages: 172, mrp: 60, price: 30 },
+];
+const pageVariants64 = [
+  { pages: 132, mrp: 58, price: 29 },
+  { pages: 160, mrp: 68, price: 34 },
+  { pages: 192, mrp: 78, price: 39 },
+];
+
+// Generate all Regular notebook products programmatically
+let regularId = 100;
+const regularProducts = [];
+
+// Map GSM + Cover to real images (same cover images for all subjects)
+const coverImages = {
+  '58 GSM|Cover 1': { front: cover1Front, back: cover1Back },
+  '58 GSM|Cover 2': { front: cover2Front, back: cover2Back },
+  '64 GSM|Cover 1': { front: gsm64Front, back: gsm64Back },
+  '64 GSM|Cover 2': { front: gsm64Cover2Front, back: gsm64Cover2Back },
+  '64 GSM|Cover 3': { front: gsm64Cover3Front, back: gsm64Cover3Back },
+};
+
+gsmTypes.forEach((gsm) => {
+  const variants = gsm === '64 GSM' ? pageVariants64 : pageVariants58;
+  covers.forEach((cover) => {
+    subjects.forEach((subject) => {
+      variants.forEach(({ pages, mrp, price }) => {
+        const realImages = coverImages[`${gsm}|${cover}`];
+        const label = `${gsm.replace(' ', '+')}+${cover.replace(' ', '+')}+${subject}`;
+
+        regularProducts.push({
+          id: regularId++,
+          category: 'Regular',
+          name: `${subject} - ${pages} Pages`,
+          pages,
+          gsm,
+          cover,
+          subject,
+          mrp,
+          price,
+          frontImage: realImages
+            ? realImages.front
+            : `https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=${label}+${pages}p+Front`,
+          backImage: realImages
+            ? realImages.back
+            : `https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=${label}+${pages}p+Back`,
+        });
+      });
+    });
+  });
+});
 
 export const products = [
   // Register Notebooks
@@ -37,40 +103,8 @@ export const products = [
     backImage: 'https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=Student+Register+Back'
   },
 
-  // Regular Notebooks
-  {
-    id: 4,
-    category: 'Regular',
-    name: 'Regular - 104 Pages',
-    pages: 104,
-    gsm: '58 GSM',
-    mrp: 36,
-    price: 18,
-    frontImage: regularFront,
-    backImage: regularBack
-  },
-  {
-    id: 5,
-    category: 'Regular',
-    name: 'Regular - 132 Pages',
-    pages: 132,
-    gsm: '58 GSM',
-    mrp: 46,
-    price: 23,
-    frontImage: regularFront,
-    backImage: regularBack
-  },
-  {
-    id: 6,
-    category: 'Regular',
-    name: 'Regular - 172 Pages',
-    pages: 172,
-    gsm: '58 GSM',
-    mrp: 60,
-    price: 30,
-    frontImage: regularFront,
-    backImage: regularBack
-  },
+  // Regular Notebooks (generated: 2 GSM x 3 Covers x 3 Subjects x 3 Page variants = 54)
+  ...regularProducts,
 
   // A5 Notebooks
   {
@@ -172,6 +206,32 @@ export const products = [
 export const getProductsByCategory = (category) => {
   return products.filter(product => product.category === category);
 };
+
+export const getRegularProducts = (gsm, cover) => {
+  return products.filter(
+    product => product.category === 'Regular' && product.gsm === gsm && product.cover === cover
+  );
+};
+
+/**
+ * Returns Regular products grouped by page count.
+ * Each group: { pages, variants: [hindiProduct, englishProduct, mathProduct] }
+ */
+export const getRegularProductsGrouped = (gsm, cover) => {
+  const filtered = getRegularProducts(gsm, cover);
+  const grouped = {};
+  filtered.forEach((product) => {
+    if (!grouped[product.pages]) {
+      grouped[product.pages] = { pages: product.pages, variants: [] };
+    }
+    grouped[product.pages].variants.push(product);
+  });
+  // Return sorted by page count ascending
+  return Object.values(grouped).sort((a, b) => a.pages - b.pages);
+};
+
+export const regularGsmTypes = gsmTypes;
+export const regularCovers = covers;
 
 export const categories = ['Regular', 'Register'];
 // Hidden categories for future: 'A5', 'Spiral', 'Hard Cover'

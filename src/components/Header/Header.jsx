@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { scrollToElement } from '../../utils/scrollToElement';
+import logo from '../../assets/Logo.jpeg';
 import './Header.css';
 
 const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) => {
@@ -54,7 +55,7 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
     <header className="header">
       <div className="header-container">
         <div className="logo" onClick={handleLogoClick}>
-          <span className="logo-icon">📓</span>
+          <img src={logo} alt="Suryaa Book Depot" className="logo-img" />
           <span className="logo-text">Suryaa Book Depot</span>
         </div>
 
