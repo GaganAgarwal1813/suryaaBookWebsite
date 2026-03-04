@@ -1,0 +1,260 @@
+.checkout-section {
+  padding: 4rem 2rem;
+  background-color: #FFFFFF;
+}
+
+.checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.checkout-title {
+  font-size: 2.5rem;
+  color: #7B3F00;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.order-success {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.order-success h3 {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.order-success p {
+  margin: 0;
+  opacity: 0.95;
+}
+
+.order-error {
+  background-color: #fff0f0;
+  border: 1px solid #ffcccc;
+  color: #cc0000;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.order-id {
+  font-size: 0.9rem;
+  background-color: rgba(255,255,255,0.2);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  display: inline-block;
+  margin: 0.5rem 0;
+}
+
+.login-prompt {
+  background-color: #FDF6EC;
+  border: 2px solid #C47B2B;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-prompt p {
+  color: #7B3F00;
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+}
+
+.login-prompt-btn {
+  background-color: #C47B2B;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-prompt-btn:hover {
+  background-color: #7B3F00;
+}
+
+.checkout-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
+}
+
+.order-summary {
+  background-color: #FDF6EC;
+  padding: 2rem;
+  border-radius: 12px;
+  height: fit-content;
+  box-shadow: 0 4px 12px rgba(123, 63, 0, 0.1);
+}
+
+.order-summary h3 {
+  color: #7B3F00;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.empty-message {
+  color: #999;
+  text-align: center;
+  padding: 2rem;
+}
+
+.summary-items {
+  margin-bottom: 1.5rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(123, 63, 0, 0.1);
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-item-name {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.summary-item-price {
+  color: #7B3F00;
+  font-weight: 600;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.total-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #7B3F00;
+}
+
+.total-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #C47B2B;
+}
+
+.checkout-form {
+  background-color: #FDF6EC;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(123, 63, 0, 0.1);
+}
+
+.checkout-form h3 {
+  color: #7B3F00;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #7B3F00;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #C47B2B;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #7B3F00;
+}
+
+.place-order-btn {
+  width: 100%;
+  background-color: #C47B2B;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  margin-top: 1rem;
+}
+
+.place-order-btn:hover:not(:disabled) {
+  background-color: #7B3F00;
+  transform: scale(1.02);
+}
+
+.place-order-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.place-order-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 968px) {
+  .checkout-content {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-section {
+    padding: 3rem 1rem;
+  }
+}

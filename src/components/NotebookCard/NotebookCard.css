@@ -1,0 +1,144 @@
+.notebook-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(123, 63, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.notebook-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(123, 63, 0, 0.2);
+}
+
+.card-images {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #FDF6EC;
+}
+
+.card-image {
+  width: 50%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #C47B2B;
+}
+
+.card-details {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.card-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #7B3F00;
+  margin: 0;
+}
+
+.card-specs {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.spec-item {
+  font-size: 0.9rem;
+  color: #666;
+  background: #FDF6EC;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #FDF6EC;
+}
+
+.price-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.selling-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #C47B2B;
+}
+
+.mrp {
+  font-size: 1rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.discount-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #2e7d32;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.add-to-cart-btn {
+  background-color: #C47B2B;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #7B3F00;
+  transform: scale(1.05);
+}
+
+.add-to-cart-btn:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .card-images {
+    padding: 0.5rem;
+  }
+
+  .card-image {
+    height: 150px;
+  }
+
+  .card-details {
+    padding: 1rem;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
