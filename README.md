@@ -1,78 +1,99 @@
-# Suryaa Book Depot - React Website
+# Suryaa Book Depot - Website
 
-A modern, single-page React application for Suryaa Book Depot - an online notebook store featuring categorized products, shopping cart functionality, and checkout.
-
-## Features
-
-- **Product Categories**: Register, A4, A5, Spiral, and Hard Cover notebooks
-- **Shopping Cart**: Add/remove items, update quantities with a slide-in cart sidebar
-- **Checkout**: Customer information form with order summary
-- **Responsive Design**: Mobile-friendly layout with warm color theme
-- **Component-Based Architecture**: Reusable React components
+An e-commerce web application for **Suryaa Book Depot** built with React and Firebase. Browse notebooks, add to cart, place orders, and manage inventory through an admin dashboard.
 
 ## Tech Stack
 
-- React 19
-- Vite
-- CSS3 (Custom styling with warm orange/brown theme)
+- **Frontend:** React 19, Vite 5
+- **Backend / Database:** Firebase (Firestore, Authentication, Analytics)
+- **Auth:** Google Sign-In via Firebase Auth
+
+## Prerequisites
+
+- **Node.js** — version **20.19+** or **22.12+** (required by Vite 5)
+- **npm** — comes bundled with Node.js
+- A modern web browser
+
+> **Tip:** You can check your Node version with `node -v`. If it's below 20.19, download the latest LTS from [https://nodejs.org](https://nodejs.org).
 
 ## Getting Started
 
-### Prerequisites
+### 1. Clone the repository
 
-- Node.js (v18 or higher recommended)
-- npm or yarn
+```bash
+git clone https://github.com/GaganAgarwal1813/suryaaBookWebsite.git
+cd suryaaBookWebsite
+```
 
-### Installation
+### 2. Install dependencies
 
-1. Install dependencies:
 ```bash
 npm install
 ```
 
-2. Start the development server:
+### 3. Run the development server
+
 ```bash
 npm run dev
 ```
 
-3. Open your browser and navigate to the URL shown in the terminal (typically `http://localhost:5173`)
+The app will start at [http://localhost:5173](http://localhost:5173) (or the next available port).
 
-### Build for Production
+### 4. Build for production
 
 ```bash
 npm run build
 ```
 
-The built files will be in the `dist` directory.
+The optimized output will be in the `dist/` folder.
+
+### 5. Preview the production build
+
+```bash
+npm run preview
+```
 
 ## Project Structure
 
 ```
-src/
-  components/
-    Header/          # Sticky navigation with cart icon
-    Hero/            # Welcome banner section
-    NotebookCard/    # Reusable product card component
-    NotebookSection/ # Category section with product grid
-    CartSidebar/     # Slide-in shopping cart
-    CartItem/        # Individual cart item with quantity controls
-    CheckoutSection/ # Checkout form and order summary
-    Footer/          # Footer with contact information
-  context/
-    CartContext.jsx  # Global cart state management
-  data/
-    products.js      # Product data (15 notebooks across 5 categories)
-  App.jsx           # Main app component
+suryaaBookWebsite/
+├── public/                  # Static assets
+├── src/
+│   ├── assets/              # Images (notebook photos, etc.)
+│   ├── components/          # React components
+│   │   ├── AdminDashboard/  # Admin panel for managing orders
+│   │   ├── AuthModal/       # Login / Sign-up modal
+│   │   ├── CartItem/        # Individual cart item
+│   │   ├── CartSidebar/     # Slide-out cart drawer
+│   │   ├── CheckoutSection/ # Checkout flow
+│   │   ├── Footer/          # Site footer
+│   │   ├── Header/          # Navigation header
+│   │   ├── Hero/            # Hero / landing banner
+│   │   ├── NotebookCard/    # Product card
+│   │   ├── NotebookSection/ # Product listing section
+│   │   └── OrderHistory/    # User's past orders
+│   ├── context/             # React Context providers
+│   │   ├── AuthContext.jsx   # Authentication state
+│   │   └── CartContext.jsx   # Shopping cart state
+│   ├── data/
+│   │   └── products.js      # Product catalog data
+│   ├── firebase/
+│   │   └── config.js        # Firebase configuration
+│   ├── App.jsx              # Root app component
+│   ├── App.css              # Global app styles
+│   ├── main.jsx             # Entry point
+│   └── index.css            # Base styles
+├── index.html               # HTML template
+├── vite.config.js           # Vite configuration
+├── package.json             # Dependencies & scripts
+└── eslint.config.js         # ESLint configuration
 ```
 
-## Color Theme
+## Available Scripts
 
-- Primary: `#C47B2B` (Warm Amber)
-- Background: `#FDF6EC` (Cream)
-- Accent: `#7B3F00` (Dark Brown)
-
-## Git Configuration
-
-Git repository initialized with:
-- Email: agarwal.gagan1813@gmail.com
-- Name: Gagan Agarwal
+| Command           | Description                        |
+| ----------------- | ---------------------------------- |
+| `npm run dev`     | Start the development server       |
+| `npm run build`   | Create a production build          |
+| `npm run preview` | Preview the production build       |
+| `npm run lint`    | Run ESLint to check for issues     |
