@@ -67,11 +67,16 @@ gsmTypes.forEach((gsm) => {
   });
 });
 
+// --- Register Notebook configuration ---
+const registerTypesList = ['All', 'Student', 'Classic', 'Premium'];
+const registerPagesList = ['All', '150', '200', '300'];
+
 export const products = [
   // Register Notebooks
   {
     id: 1,
     category: 'Register',
+    type: 'Classic',
     name: 'Classic Register - 200 Pages',
     pages: 200,
     gsm: 'Ruled',
@@ -83,6 +88,7 @@ export const products = [
   {
     id: 2,
     category: 'Register',
+    type: 'Premium',
     name: 'Premium Register - 300 Pages',
     pages: 300,
     gsm: 'Ruled',
@@ -94,6 +100,7 @@ export const products = [
   {
     id: 3,
     category: 'Register',
+    type: 'Student',
     name: 'Student Register - 150 Pages',
     pages: 150,
     gsm: 'Ruled',
@@ -232,6 +239,22 @@ export const getRegularProductsGrouped = (gsm, cover) => {
 
 export const regularGsmTypes = gsmTypes;
 export const regularCovers = covers;
+
+export const registerTypes = registerTypesList;
+export const registerPageOptions = registerPagesList;
+
+/**
+ * Returns Register products filtered by type and page count.
+ * 'All' means no filtering on that dimension.
+ */
+export const getRegisterProducts = (type, pages) => {
+  return products.filter((product) => {
+    if (product.category !== 'Register') return false;
+    if (type !== 'All' && product.type !== type) return false;
+    if (pages !== 'All' && product.pages !== Number(pages)) return false;
+    return true;
+  });
+};
 
 export const categories = ['Regular', 'Register'];
 // Hidden categories for future: 'A5', 'Spiral', 'Hard Cover'

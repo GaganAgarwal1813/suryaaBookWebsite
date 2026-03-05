@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useCart } from '../../context/CartContext';
+// [CART/ORDER] import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { scrollToElement } from '../../utils/scrollToElement';
 import logo from '../../assets/Logo.jpeg';
 import './Header.css';
 
-const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) => {
-  const { cartItemCount } = useCart();
+const Header = ({ /* [CART/ORDER] onCartClick, */ onLoginClick, /* [CART/ORDER] onMyOrdersClick, */ onAdminClick }) => {
+  // [CART/ORDER] const { cartItemCount } = useCart();
   const { currentUser, logout, isAdmin } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -42,6 +42,7 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
     }
   };
 
+  /* [CART/ORDER]
   const cartButton = (
     <button className="cart-button" onClick={onCartClick}>
       <span className="cart-icon">🛒</span>
@@ -50,6 +51,7 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
       )}
     </button>
   );
+  */
 
   return (
     <header className="header">
@@ -72,22 +74,24 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
                   Hi, {currentUser.displayName || currentUser.email?.split('@')[0]}
                 </span>
               </div>
+              {/* [CART/ORDER]
               <button className="header-action-btn" onClick={onMyOrdersClick} title="My Orders">
                 📦
               </button>
+              */}
               {isAdmin && (
                 <button className="header-action-btn admin-btn" onClick={onAdminClick} title="Admin Dashboard">
                   ⚙️
                 </button>
               )}
-              {cartButton}
+              {/* [CART/ORDER] {cartButton} */}
               <button className="logout-btn" onClick={handleLogout}>
                 Logout
               </button>
             </>
           ) : (
             <>
-              {cartButton}
+              {/* [CART/ORDER] {cartButton} */}
               <button className="login-btn" onClick={onLoginClick}>
                 Login
               </button>
@@ -107,9 +111,9 @@ const Header = ({ onCartClick, onLoginClick, onMyOrdersClick, onAdminClick }) =>
 };
 
 Header.propTypes = {
-  onCartClick: PropTypes.func.isRequired,
+  // [CART/ORDER] onCartClick: PropTypes.func.isRequired,
   onLoginClick: PropTypes.func.isRequired,
-  onMyOrdersClick: PropTypes.func.isRequired,
+  // [CART/ORDER] onMyOrdersClick: PropTypes.func.isRequired,
   onAdminClick: PropTypes.func.isRequired
 };
 

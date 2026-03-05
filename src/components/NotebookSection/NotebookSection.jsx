@@ -1,19 +1,33 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { getProductsByCategory, getRegularProductsGrouped, regularGsmTypes, regularCovers } from '../../data/products';
+import {
+  getProductsByCategory,
+  getRegularProductsGrouped,
+  getRegisterProducts,
+  regularGsmTypes,
+  regularCovers,
+  registerTypes,
+  registerPageOptions
+} from '../../data/products';
 import NotebookCard from '../NotebookCard/NotebookCard';
 import './NotebookSection.css';
 
 const NotebookSection = ({ category, sectionId }) => {
   const isRegular = category === 'Regular';
+  const isRegister = category === 'Register';
 
   // Filter state for Regular notebooks
   const [selectedGsm, setSelectedGsm] = useState(regularGsmTypes[0]);
   const [selectedCover, setSelectedCover] = useState(regularCovers[0]);
 
+  // Filter state for Register notebooks
+  const [selectedType, setSelectedType] = useState(registerTypes[0]);
+  const [selectedPages, setSelectedPages] = useState(registerPageOptions[0]);
+
   // Get the right product list
   const regularGroups = isRegular ? getRegularProductsGrouped(selectedGsm, selectedCover) : [];
-  const otherProducts = !isRegular ? getProductsByCategory(category) : [];
+  const registerProducts = isRegister ? getRegisterProducts(selectedType, selectedPages) : [];
+  const otherProducts = (!isRegular && !isRegister) ? getProductsByCategory(category) : [];
 
   return (
     <section id={sectionId} className="notebook-section">
@@ -56,6 +70,42 @@ const NotebookSection = ({ category, sectionId }) => {
           </div>
         )}
 
+        {isRegister && (
+          <div className="filter-controls">
+            {/* Type Tabs */}
+            <div className="filter-group">
+              <span className="filter-label">Type</span>
+              <div className="gsm-tabs">
+                {registerTypes.map((type) => (
+                  <button
+                    key={type}
+                    className={`gsm-tab ${selectedType === type ? 'active' : ''}`}
+                    onClick={() => setSelectedType(type)}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Pages Filter Pills */}
+            <div className="filter-group">
+              <span className="filter-label">Pages</span>
+              <div className="cover-pills">
+                {registerPageOptions.map((pages) => (
+                  <button
+                    key={pages}
+                    className={`cover-pill ${selectedPages === pages ? 'active' : ''}`}
+                    onClick={() => setSelectedPages(pages)}
+                  >
+                    {pages === 'All' ? 'All' : `${pages} Pages`}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="notebooks-grid">
           {isRegular
             ? regularGroups.map((group) => (
@@ -64,9 +114,13 @@ const NotebookSection = ({ category, sectionId }) => {
                   variants={group.variants}
                 />
               ))
-            : otherProducts.map((product) => (
-                <NotebookCard key={product.id} product={product} />
-              ))
+            : isRegister
+              ? registerProducts.map((product) => (
+                  <NotebookCard key={product.id} product={product} />
+                ))
+              : otherProducts.map((product) => (
+                  <NotebookCard key={product.id} product={product} />
+                ))
           }
         </div>
       </div>

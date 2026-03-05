@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useCart } from '../../context/CartContext';
+// [CART/ORDER] import { useCart } from '../../context/CartContext';
 import './NotebookCard.css';
 
 const NotebookCard = ({ product, variants }) => {
-  const { addToCart } = useCart();
+  // [CART/ORDER] const { addToCart } = useCart();
   const hasVariants = variants && variants.length > 0;
 
   // Subject selector state (only used when variants are provided)
@@ -13,9 +13,10 @@ const NotebookCard = ({ product, variants }) => {
   // Determine the active product to display
   const activeProduct = hasVariants ? variants[selectedIdx] : product;
 
-  const handleAddToCart = () => {
-    addToCart(activeProduct);
-  };
+  // [CART/ORDER]
+  // const handleAddToCart = () => {
+  //   addToCart(activeProduct);
+  // };
 
   const hasDiscount = activeProduct.mrp && activeProduct.mrp > activeProduct.price;
   const discountPercent = hasDiscount
@@ -77,9 +78,11 @@ const NotebookCard = ({ product, variants }) => {
               </>
             )}
           </div>
+          {/* [CART/ORDER]
           <button className="add-to-cart-btn" onClick={handleAddToCart}>
             <span>🛒</span> Add to Cart
           </button>
+          */}
         </div>
       </div>
     </div>
