@@ -138,10 +138,10 @@
   border-color: var(--color-primary-dark);
 }
 
-.status-select-pending { color: #856404; }
-.status-select-processing { color: #004085; }
-.status-select-shipped { color: #155724; }
-.status-select-delivered { color: #0B5A1D; }
+.status-select-pending { color: var(--color-status-pending); }
+.status-select-processing { color: var(--color-status-processing); }
+.status-select-shipped { color: var(--color-status-shipped); }
+.status-select-delivered { color: var(--color-status-delivered); }
 
 .admin-customer {
   font-size: 0.9rem;

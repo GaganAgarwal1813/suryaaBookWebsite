@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-// [CART/ORDER] import { useCart } from '../../context/CartContext';
+import { formatCurrency } from '../../utils/orderUtils';
 import './NotebookCard.css';
 
 const NotebookCard = ({ product, variants }) => {
-  // [CART/ORDER] const { addToCart } = useCart();
   const hasVariants = variants && variants.length > 0;
 
   // Subject selector state (only used when variants are provided)
@@ -12,11 +11,6 @@ const NotebookCard = ({ product, variants }) => {
 
   // Determine the active product to display
   const activeProduct = hasVariants ? variants[selectedIdx] : product;
-
-  // [CART/ORDER]
-  // const handleAddToCart = () => {
-  //   addToCart(activeProduct);
-  // };
 
   const hasDiscount = activeProduct.mrp && activeProduct.mrp > activeProduct.price;
   const discountPercent = hasDiscount
@@ -72,19 +66,14 @@ const NotebookCard = ({ product, variants }) => {
         </div>
         <div className="card-footer">
           <div className="price-group">
-            <span className="selling-price">₹{activeProduct.price}</span>
+            <span className="selling-price">{formatCurrency(activeProduct.price)}</span>
             {hasDiscount && (
               <>
-                <span className="mrp">₹{activeProduct.mrp}</span>
+                <span className="mrp">{formatCurrency(activeProduct.mrp)}</span>
                 <span className="discount-badge">{discountPercent}% off</span>
               </>
             )}
           </div>
-          {/* [CART/ORDER]
-          <button className="add-to-cart-btn" onClick={handleAddToCart}>
-            <span>🛒</span> Add to Cart
-          </button>
-          */}
         </div>
       </div>
     </div>

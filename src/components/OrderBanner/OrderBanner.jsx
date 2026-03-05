@@ -1,3 +1,4 @@
+import { PHONE, PHONE_TEL } from '../../constants/business';
 import './OrderBanner.css';
 
 const OrderBanner = () => {
@@ -11,7 +12,7 @@ const OrderBanner = () => {
         </div>
         <div className="order-banner-text">
           <span className="order-banner-heading">Want to place an order? Call us!</span>
-          <a href="tel:+919927158581" className="order-banner-phone">+91 9927158581</a>
+          <a href={`tel:${PHONE_TEL}`} className="order-banner-phone">{PHONE}</a>
         </div>
       </div>
     </div>

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useAuth } from '../../context/AuthContext';
-import { ORDER_STATUSES, ORDERS_COLLECTION, getStatusLabel, formatDate, formatCurrency, lineTotal } from '../../utils/orderUtils';
+import { ORDER_STATUSES, ORDERS_COLLECTION, getStatusLabel, formatDate, formatCurrency } from '../../utils/orderUtils';
 import Modal from '../Modal/Modal';
+import OrderItemRow from '../OrderItemRow/OrderItemRow';
 import './OrderHistory.css';
 
 const OrderHistory = ({ onClose }) => {
@@ -79,10 +80,7 @@ const OrderHistory = ({ onClose }) => {
 
               <div className="oh-order-items">
                 {order.items.map((item, idx) => (
-                  <div key={idx} className="oh-item">
-                    <span>{item.name} × {item.quantity}</span>
-                    <span>{formatCurrency(lineTotal(item))}</span>
-                  </div>
+                  <OrderItemRow key={idx} item={item} className="oh-item" />
                 ))}
               </div>
 

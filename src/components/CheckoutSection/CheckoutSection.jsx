@@ -7,6 +7,7 @@ import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { useFormData } from '../../hooks/useFormData';
 import { ORDERS_COLLECTION, formatCurrency, lineTotal } from '../../utils/orderUtils';
+import OrderItemRow from '../OrderItemRow/OrderItemRow';
 import './CheckoutSection.css';
 
 const INITIAL_FORM = { name: '', email: '', phone: '', address: '' };
@@ -131,10 +132,7 @@ const CheckoutSection = ({ onLoginClick }) => {
                 <>
                   <div className="summary-items">
                     {cartItems.map(item => (
-                      <div key={item.id} className="summary-item">
-                        <span className="summary-item-name">{item.name} × {item.quantity}</span>
-                        <span className="summary-item-price">{formatCurrency(lineTotal(item))}</span>
-                      </div>
+                      <OrderItemRow key={item.id} item={item} className="summary-item" />
                     ))}
                   </div>
                   <div className="summary-total">

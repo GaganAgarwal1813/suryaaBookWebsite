@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { collection, query, orderBy, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useAuth } from '../../context/AuthContext';
-import { ORDER_STATUSES, ORDERS_COLLECTION, getStatusLabel, formatDate, formatCurrency, lineTotal } from '../../utils/orderUtils';
+import { ORDER_STATUSES, ORDERS_COLLECTION, getStatusLabel, formatDate, formatCurrency } from '../../utils/orderUtils';
 import Modal from '../Modal/Modal';
+import OrderItemRow from '../OrderItemRow/OrderItemRow';
 import './AdminDashboard.css';
 
 const AdminDashboard = ({ onClose }) => {
@@ -51,13 +52,10 @@ const AdminDashboard = ({ onClose }) => {
     ? orders
     : orders.filter(o => o.status === filterStatus);
 
-  const statusCounts = {
-    all: orders.length,
-    pending: orders.filter(o => o.status === 'pending').length,
-    processing: orders.filter(o => o.status === 'processing').length,
-    shipped: orders.filter(o => o.status === 'shipped').length,
-    delivered: orders.filter(o => o.status === 'delivered').length
-  };
+  const statusCounts = orders.reduce(
+    (acc, o) => { acc.all++; acc[o.status] = (acc[o.status] || 0) + 1; return acc; },
+    { all: 0, pending: 0, processing: 0, shipped: 0, delivered: 0 }
+  );
 
   if (!isAdmin) {
     return (
@@ -126,10 +124,7 @@ const AdminDashboard = ({ onClose }) => {
 
                 <div className="admin-items">
                   {order.items?.map((item, idx) => (
-                    <div key={idx} className="admin-item">
-                      <span>{item.name} × {item.quantity}</span>
-                      <span>{formatCurrency(lineTotal(item))}</span>
-                    </div>
+                    <OrderItemRow key={idx} item={item} className="admin-item" />
                   ))}
                 </div>
 

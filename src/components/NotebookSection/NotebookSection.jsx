@@ -10,6 +10,7 @@ import {
   registerPageOptions
 } from '../../data/products';
 import NotebookCard from '../NotebookCard/NotebookCard';
+import FilterGroup from '../FilterGroup/FilterGroup';
 import './NotebookSection.css';
 
 const NotebookSection = ({ category, sectionId }) => {
@@ -29,6 +30,8 @@ const NotebookSection = ({ category, sectionId }) => {
   const registerProducts = isRegister ? getRegisterProducts(selectedType, selectedPages) : [];
   const otherProducts = (!isRegular && !isRegister) ? getProductsByCategory(category) : [];
 
+  const renderPageLabel = (pages) => (pages === 'All' ? 'All' : `${pages} Pages`);
+
   return (
     <section id={sectionId} className="notebook-section">
       <div className="section-container">
@@ -36,73 +39,40 @@ const NotebookSection = ({ category, sectionId }) => {
 
         {isRegular && (
           <div className="filter-controls">
-            {/* GSM Tabs */}
-            <div className="filter-group">
-              <span className="filter-label">Paper Quality</span>
-              <div className="gsm-tabs">
-                {regularGsmTypes.map((gsm) => (
-                  <button
-                    key={gsm}
-                    className={`gsm-tab ${selectedGsm === gsm ? 'active' : ''}`}
-                    onClick={() => setSelectedGsm(gsm)}
-                  >
-                    {gsm}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Cover Filter Pills */}
-            <div className="filter-group">
-              <span className="filter-label">Cover Design</span>
-              <div className="cover-pills">
-                {regularCovers.map((cover) => (
-                  <button
-                    key={cover}
-                    className={`cover-pill ${selectedCover === cover ? 'active' : ''}`}
-                    onClick={() => setSelectedCover(cover)}
-                  >
-                    {cover}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <FilterGroup
+              label="Paper Quality"
+              options={regularGsmTypes}
+              selected={selectedGsm}
+              onSelect={setSelectedGsm}
+              variant="tab"
+            />
+            <FilterGroup
+              label="Cover Design"
+              options={regularCovers}
+              selected={selectedCover}
+              onSelect={setSelectedCover}
+              variant="pill"
+            />
           </div>
         )}
 
         {isRegister && (
           <div className="filter-controls">
-            {/* Type Tabs */}
-            <div className="filter-group">
-              <span className="filter-label">Type</span>
-              <div className="gsm-tabs">
-                {registerTypes.map((type) => (
-                  <button
-                    key={type}
-                    className={`gsm-tab ${selectedType === type ? 'active' : ''}`}
-                    onClick={() => setSelectedType(type)}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Pages Filter Pills */}
-            <div className="filter-group">
-              <span className="filter-label">Pages</span>
-              <div className="cover-pills">
-                {registerPageOptions.map((pages) => (
-                  <button
-                    key={pages}
-                    className={`cover-pill ${selectedPages === pages ? 'active' : ''}`}
-                    onClick={() => setSelectedPages(pages)}
-                  >
-                    {pages === 'All' ? 'All' : `${pages} Pages`}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <FilterGroup
+              label="Type"
+              options={registerTypes}
+              selected={selectedType}
+              onSelect={setSelectedType}
+              variant="tab"
+            />
+            <FilterGroup
+              label="Pages"
+              options={registerPageOptions}
+              selected={selectedPages}
+              onSelect={setSelectedPages}
+              variant="pill"
+              renderLabel={renderPageLabel}
+            />
           </div>
         )}
 

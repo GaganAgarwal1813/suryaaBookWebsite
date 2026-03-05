@@ -8,10 +8,9 @@ import {
   updateProfile
 } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase/config';
+import { ADMIN_EMAIL } from '../constants/business';
 
 const AuthContext = createContext();
-
-const ADMIN_EMAIL = 'suryaabookdepothapur@gmail.com';
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);

@@ -1,71 +1,7 @@
-.auth-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1100;
-  animation: authFadeIn 0.3s;
-}
+/* AuthModal-specific styles (overlay, header, close btn handled by Modal) */
 
-@keyframes authFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.auth-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  border-radius: 16px;
-  padding: 2.5rem;
-  width: 90%;
-  max-width: 420px;
-  z-index: 1200;
-  box-shadow: 0 20px 60px var(--shadow-brand-lg);
-  animation: authSlideUp 0.3s ease-out;
-}
-
-@keyframes authSlideUp {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -45%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-.auth-close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  color: var(--color-primary-dark);
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s;
-}
-
-.auth-close-btn:hover {
-  background-color: var(--color-bg-cream);
-}
-
-.auth-title {
-  color: var(--color-primary-dark);
-  font-size: 1.8rem;
-  margin: 0 0 0.5rem 0;
+.auth-modal-panel {
+  /* Override modal defaults for the compact auth form */
 }
 
 .auth-subtitle {
@@ -205,11 +141,4 @@
 .auth-toggle-btn:hover {
   color: var(--color-primary-dark);
   text-decoration: underline;
-}
-
-@media (max-width: 480px) {
-  .auth-modal {
-    padding: 1.5rem;
-    width: 95%;
-  }
 }

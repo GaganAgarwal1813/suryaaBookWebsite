@@ -8,7 +8,7 @@
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: var(--max-width-container);
   margin: 0 auto;
   padding: 0 2rem 1rem;
   display: flex;

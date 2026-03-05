@@ -64,23 +64,23 @@
 }
 
 .oh-status-pending {
-  background-color: #FFF3CD;
-  color: #856404;
+  background-color: var(--color-status-pending-bg);
+  color: var(--color-status-pending);
 }
 
 .oh-status-processing {
-  background-color: #CCE5FF;
-  color: #004085;
+  background-color: var(--color-status-processing-bg);
+  color: var(--color-status-processing);
 }
 
 .oh-status-shipped {
-  background-color: #D4EDDA;
-  color: #155724;
+  background-color: var(--color-status-shipped-bg);
+  color: var(--color-status-shipped);
 }
 
 .oh-status-delivered {
-  background-color: #C3E6CB;
-  color: #0B5A1D;
+  background-color: var(--color-status-delivered-bg);
+  color: var(--color-status-delivered);
 }
 
 /* Status Tracker */
