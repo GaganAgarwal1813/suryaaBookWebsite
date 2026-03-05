@@ -4,13 +4,13 @@
   background-color: var(--color-white);
   box-shadow: 0 2px 8px var(--shadow-brand-sm);
   z-index: 1000;
-  padding: 1rem 0;
+  padding-top: 1rem;
 }
 
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

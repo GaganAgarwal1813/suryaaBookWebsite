@@ -1,6 +1,7 @@
 .notebook-section {
   padding: 4rem 2rem;
   background-color: var(--color-bg-cream);
+  scroll-margin-top: 80px;
 }
 
 .notebook-section:nth-child(even) {

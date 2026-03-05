@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 // [CART/ORDER] import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { scrollToElement } from '../../utils/scrollToElement';
+import OrderBanner from '../OrderBanner/OrderBanner';
 import logo from '../../assets/Logo.jpeg';
 import './Header.css';
 
@@ -106,6 +107,7 @@ const Header = ({ /* [CART/ORDER] onCartClick, */ onLoginClick, /* [CART/ORDER] 
           </button>
         </div>
       </div>
+      <OrderBanner />
     </header>
   );
 };
