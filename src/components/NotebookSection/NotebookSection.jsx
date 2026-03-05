@@ -7,6 +7,7 @@ import {
   regularGsmTypes,
   regularCovers,
   registerTypes,
+  registerCovers,
   registerPageOptions
 } from '../../data/products';
 import NotebookCard from '../NotebookCard/NotebookCard';
@@ -23,11 +24,12 @@ const NotebookSection = ({ category, sectionId }) => {
 
   // Filter state for Register notebooks
   const [selectedType, setSelectedType] = useState(registerTypes[0]);
+  const [selectedRegCover, setSelectedRegCover] = useState(registerCovers[0]);
   const [selectedPages, setSelectedPages] = useState(registerPageOptions[0]);
 
   // Get the right product list
   const regularGroups = isRegular ? getRegularProductsGrouped(selectedGsm, selectedCover) : [];
-  const registerProducts = isRegister ? getRegisterProducts(selectedType, selectedPages) : [];
+  const registerProducts = isRegister ? getRegisterProducts(selectedType, selectedRegCover, selectedPages) : [];
   const otherProducts = (!isRegular && !isRegister) ? getProductsByCategory(category) : [];
 
   const renderPageLabel = (pages) => (pages === 'All' ? 'All' : `${pages} Pages`);
@@ -64,6 +66,13 @@ const NotebookSection = ({ category, sectionId }) => {
               selected={selectedType}
               onSelect={setSelectedType}
               variant="tab"
+            />
+            <FilterGroup
+              label="Cover Design"
+              options={registerCovers}
+              selected={selectedRegCover}
+              onSelect={setSelectedRegCover}
+              variant="pill"
             />
             <FilterGroup
               label="Pages"
