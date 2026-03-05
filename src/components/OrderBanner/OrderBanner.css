@@ -1,0 +1,73 @@
+.order-banner {
+  background: var(--color-white);
+  border-bottom: 2px solid var(--color-border);
+  border-left: 5px solid var(--color-primary);
+  padding: 1rem 2rem;
+}
+
+.order-banner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.order-banner-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.order-banner-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.order-banner-heading {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.order-banner-phone {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.order-banner-phone:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .order-banner {
+    padding: 0.85rem 1rem;
+  }
+
+  .order-banner-inner {
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: center;
+  }
+
+  .order-banner-text {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .order-banner-heading {
+    font-size: 0.95rem;
+  }
+
+  .order-banner-phone {
+    font-size: 1.05rem;
+  }
+}
