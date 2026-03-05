@@ -65,8 +65,10 @@ const NotebookCard = ({ product, variants }) => {
         )}
 
         <div className="card-specs">
-          <span className="spec-item">📄 {activeProduct.pages} Pages</span>
           <span className="spec-item">📃 {activeProduct.gsm}</span>
+          {activeProduct.dimensions && (
+            <span className="spec-item">📐 {activeProduct.dimensions}</span>
+          )}
         </div>
         <div className="card-footer">
           <div className="price-group">

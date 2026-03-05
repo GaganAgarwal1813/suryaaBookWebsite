@@ -11,7 +11,7 @@ import gsm64Cover3Back from '../assets/Notebook64GSM/back_2.jpeg';
 
 // --- Regular Notebook configuration ---
 const gsmTypes = ['64 GSM', '58 GSM'];
-const covers = ['Cover 1', 'Cover 2', 'Cover 3'];
+const covers = ['Sports Edition', 'Nature Edition', 'Adventure Edition'];
 const subjects = ['Hindi', 'English', 'Math'];
 const pageVariants58 = [
   { pages: 104, mrp: 36, price: 18 },
@@ -30,11 +30,11 @@ const regularProducts = [];
 
 // Map GSM + Cover to real images (same cover images for all subjects)
 const coverImages = {
-  '58 GSM|Cover 1': { front: cover1Front, back: cover1Back },
-  '58 GSM|Cover 2': { front: cover2Front, back: cover2Back },
-  '64 GSM|Cover 1': { front: gsm64Front, back: gsm64Back },
-  '64 GSM|Cover 2': { front: gsm64Cover2Front, back: gsm64Cover2Back },
-  '64 GSM|Cover 3': { front: gsm64Cover3Front, back: gsm64Cover3Back },
+  '58 GSM|Sports Edition': { front: cover1Front, back: cover1Back },
+  '58 GSM|Nature Edition': { front: cover2Front, back: cover2Back },
+  '64 GSM|Sports Edition': { front: gsm64Front, back: gsm64Back },
+  '64 GSM|Nature Edition': { front: gsm64Cover2Front, back: gsm64Cover2Back },
+  '64 GSM|Adventure Edition': { front: gsm64Cover3Front, back: gsm64Cover3Back },
 };
 
 gsmTypes.forEach((gsm) => {
@@ -53,6 +53,7 @@ gsmTypes.forEach((gsm) => {
           gsm,
           cover,
           subject,
+          dimensions: '18 × 24 cm',
           mrp,
           price,
           frontImage: realImages
