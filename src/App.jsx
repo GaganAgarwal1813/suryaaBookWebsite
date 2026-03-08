@@ -13,7 +13,7 @@ function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/suryaaBookWebsite">
       <AuthProvider>
         <div className="App">
           <Header
