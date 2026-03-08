@@ -89,8 +89,7 @@ gsmTypes.forEach((gsm) => {
   covers.forEach((cover) => {
     subjects.forEach((subject) => {
       variants.forEach(({ pages, mrp, price }) => {
-        const realImages = coverImages[`${gsm}|${cover}`];
-        const label = `${gsm.replace(' ', '+')}+${cover.replace(' ', '+')}+${subject}`;
+        const images = coverImages[`${gsm}|${cover}`];
 
         regularProducts.push({
           id: regularId++,
@@ -103,12 +102,8 @@ gsmTypes.forEach((gsm) => {
           dimensions: '18 × 24 cm',
           mrp,
           price,
-          frontImage: realImages
-            ? realImages.front
-            : `https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=${label}+${pages}p+Front`,
-          backImage: realImages
-            ? realImages.back
-            : `https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=${label}+${pages}p+Back`,
+          frontImage: images.front,
+          backImage: images.back,
         });
       });
     });
@@ -117,8 +112,6 @@ gsmTypes.forEach((gsm) => {
 
 // --- Register Notebook configuration ---
 const registerTypesList = ['All', 'A4 64 GSM', 'Long 64 GSM'];
-const registerCoversList = ['All', 'Balloon Edition', 'Rainbow Edition', 'Heritage Edition', 'Mountain Edition'];
-const registerPagesList = ['All', '132', '140', '172', '220', '240'];
 
 const a4RegisterPageVariants = [
   { pages: 132, mrp: 78, price: 39 },
@@ -177,135 +170,9 @@ registerNewTypes.forEach((type) => {
 });
 
 export const products = [
-  // Register Notebooks (generated: 2 types x 4 covers x 3 page variants)
   ...generatedRegisterProducts,
-
-  // Regular Notebooks (generated: 2 GSM x 6 Covers x 3 Subjects x 3 Page variants)
   ...regularProducts,
-
-  // A5 Notebooks
-  {
-    id: 7,
-    category: 'A5',
-    name: 'A5 Notebook - 80 Pages',
-    pages: 80,
-    gsm: 'Ruled',
-    price: 140,
-    frontImage: 'https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=A5+Notebook+Front',
-    backImage: 'https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=A5+Notebook+Back'
-  },
-  {
-    id: 8,
-    category: 'A5',
-    name: 'A5 Notebook - 120 Pages',
-    pages: 120,
-    gsm: 'Ruled',
-    price: 190,
-    frontImage: 'https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=A5+120+Front',
-    backImage: 'https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=A5+120+Back'
-  },
-  {
-    id: 9,
-    category: 'A5',
-    name: 'A5 Notebook - Grid',
-    pages: 100,
-    gsm: 'Grid',
-    price: 170,
-    frontImage: 'https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=A5+Grid+Front',
-    backImage: 'https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=A5+Grid+Back'
-  },
-
-  // Spiral Notebooks
-  {
-    id: 10,
-    category: 'Spiral',
-    name: 'Spiral Notebook - 100 Pages',
-    pages: 100,
-    gsm: 'Ruled',
-    price: 200,
-    frontImage: 'https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=Spiral+Front',
-    backImage: 'https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=Spiral+Back'
-  },
-  {
-    id: 11,
-    category: 'Spiral',
-    name: 'Spiral Notebook - 150 Pages',
-    pages: 150,
-    gsm: 'Ruled',
-    price: 280,
-    frontImage: 'https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=Spiral+150+Front',
-    backImage: 'https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=Spiral+150+Back'
-  },
-  {
-    id: 12,
-    category: 'Spiral',
-    name: 'Spiral Notebook - College Ruled',
-    pages: 120,
-    gsm: 'College Ruled',
-    price: 240,
-    frontImage: 'https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=Spiral+College+Front',
-    backImage: 'https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=Spiral+College+Back'
-  },
-
-  // Hard Cover Notebooks
-  {
-    id: 13,
-    category: 'Hard Cover',
-    name: 'Hard Cover Notebook - 200 Pages',
-    pages: 200,
-    gsm: 'Ruled',
-    price: 350,
-    frontImage: 'https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=Hard+Cover+Front',
-    backImage: 'https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=Hard+Cover+Back'
-  },
-  {
-    id: 14,
-    category: 'Hard Cover',
-    name: 'Hard Cover Notebook - 300 Pages',
-    pages: 300,
-    gsm: 'Ruled',
-    price: 480,
-    frontImage: 'https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=Hard+Cover+300+Front',
-    backImage: 'https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=Hard+Cover+300+Back'
-  },
-  {
-    id: 15,
-    category: 'Hard Cover',
-    name: 'Premium Hard Cover - Leather',
-    pages: 250,
-    gsm: 'Ruled',
-    price: 650,
-    frontImage: 'https://via.placeholder.com/300x400/C47B2B/FFFFFF?text=Leather+Front',
-    backImage: 'https://via.placeholder.com/300x400/7B3F00/FFFFFF?text=Leather+Back'
-  }
 ];
-
-export const getProductsByCategory = (category) => {
-  return products.filter(product => product.category === category);
-};
-
-export const getRegularProducts = (gsm, cover) => {
-  return products.filter(
-    product => product.category === 'Regular' && product.gsm === gsm && product.cover === cover
-  );
-};
-
-/**
- * Returns Regular products grouped by page count.
- * Each group: { pages, variants: [hindiProduct, englishProduct, mathProduct] }
- */
-export const getRegularProductsGrouped = (gsm, cover) => {
-  const filtered = getRegularProducts(gsm, cover);
-  const grouped = {};
-  filtered.forEach((product) => {
-    if (!grouped[product.pages]) {
-      grouped[product.pages] = { pages: product.pages, variants: [] };
-    }
-    grouped[product.pages].variants.push(product);
-  });
-  // Return sorted by page count ascending
-  return Object.values(grouped).sort((a, b) => a.pages - b.pages);
-};
 
 /**
  * Returns Regular products grouped by GSM+Cover.
@@ -339,25 +206,8 @@ export const getRegularProductsGroupedByCover = (gsm) => {
 };
 
 export const regularGsmTypes = gsmFilterOptions;
-export const regularCovers = coversPerGsm;
 
 export const registerTypes = registerTypesList;
-export const registerCovers = registerCoversList;
-export const registerPageOptions = registerPagesList;
-
-/**
- * Returns Register products filtered by type, cover, and page count.
- * 'All' means no filtering on that dimension.
- */
-export const getRegisterProducts = (type, cover, pages) => {
-  return products.filter((product) => {
-    if (product.category !== 'Register') return false;
-    if (type !== 'All' && product.type !== type) return false;
-    if (cover !== 'All' && product.cover && product.cover !== cover) return false;
-    if (pages !== 'All' && product.pages !== Number(pages)) return false;
-    return true;
-  });
-};
 
 /**
  * Returns Register products grouped by type+cover.
@@ -387,4 +237,3 @@ export const getRegisterProductsGrouped = (type, cover) => {
 };
 
 export const categories = ['Regular', 'Register'];
-// Hidden categories for future: 'A5', 'Spiral', 'Hard Cover'

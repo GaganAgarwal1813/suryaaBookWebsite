@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  getProductsByCategory,
   getRegularProductsGroupedByCover,
   getRegisterProductsGrouped,
   regularGsmTypes,
@@ -21,7 +20,6 @@ const NotebookSection = ({ category, sectionId }) => {
 
   const regularCoverGroups = isRegular ? getRegularProductsGroupedByCover(selectedGsm) : [];
   const registerGroups = isRegister ? getRegisterProductsGrouped(selectedType, 'All') : [];
-  const otherProducts = (!isRegular && !isRegister) ? getProductsByCategory(category) : [];
 
   return (
     <section id={sectionId} className="notebook-section">
@@ -52,7 +50,7 @@ const NotebookSection = ({ category, sectionId }) => {
           </div>
         )}
 
-        <div className={`notebooks-grid${(isRegular || isRegister) ? ' notebooks-grid--covers' : ''}`}>
+        <div className="notebooks-grid notebooks-grid--covers">
           {isRegular
             ? regularCoverGroups.map((group) => (
                 <NotebookCard
@@ -60,16 +58,12 @@ const NotebookSection = ({ category, sectionId }) => {
                   products={group.products}
                 />
               ))
-            : isRegister
-              ? registerGroups.map((group) => (
-                  <NotebookCard
-                    key={group.key}
-                    products={group.products}
-                  />
-                ))
-              : otherProducts.map((product) => (
-                  <NotebookCard key={product.id} product={product} />
-                ))
+            : registerGroups.map((group) => (
+                <NotebookCard
+                  key={group.key}
+                  products={group.products}
+                />
+              ))
           }
         </div>
       </div>
