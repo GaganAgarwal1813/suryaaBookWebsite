@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "prop-types": "^15.8.1",
+    "puppeteer": "^24.38.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.1"
