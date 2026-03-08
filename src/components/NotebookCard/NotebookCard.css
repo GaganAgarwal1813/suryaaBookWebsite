@@ -82,6 +82,36 @@
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
+/* ---- Page Tags ---- */
+.page-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.page-tag {
+  padding: 0.35rem 0.85rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 20px;
+  background: white;
+  color: var(--color-primary-dark);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.page-tag:hover {
+  background: var(--color-bg-cream);
+  border-color: var(--color-primary-dark);
+}
+
+.page-tag.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
 /* ---- Specs & Footer ---- */
 .card-specs {
   display: flex;

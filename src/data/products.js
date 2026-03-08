@@ -46,7 +46,10 @@ import longRegCover4Back from '../assets/LongNotebook64GSM/back_4.png';
 
 // --- Regular Notebook configuration ---
 const gsmTypes = ['64 GSM', '58 GSM'];
-const covers = ['Sports Edition', 'Nature Edition', 'Adventure Edition', 'Urban Edition', 'Floral Edition', 'Abstract Edition'];
+const gsmFilterOptions = ['All', ...gsmTypes];
+const covers58 = ['Hockey Edition', 'Birdie Edition', 'Forest Edition', 'Kite Edition', 'Mountain Edition', 'Rainbow Edition'];
+const covers64 = ['Football Edition', 'Music Edition', 'Paragliding Edition', 'Sunset Edition', 'Balloon Edition', 'Heritage Edition'];
+const coversPerGsm = { '58 GSM': covers58, '64 GSM': covers64 };
 const subjects = ['Hindi', 'English', 'Math'];
 const pageVariants58 = [
   { pages: 104, mrp: 36, price: 18 },
@@ -65,23 +68,24 @@ const regularProducts = [];
 
 // Map GSM + Cover to real images (same cover images for all subjects)
 const coverImages = {
-  '58 GSM|Sports Edition': { front: cover1Front, back: cover1Back },
-  '58 GSM|Nature Edition': { front: cover2Front, back: cover2Back },
-  '58 GSM|Adventure Edition': { front: cover3Front, back: cover3Back },
-  '58 GSM|Urban Edition': { front: cover4Front, back: cover4Back },
-  '58 GSM|Floral Edition': { front: cover5Front, back: cover5Back },
-  '58 GSM|Abstract Edition': { front: cover6Front, back: cover6Back },
+  '58 GSM|Hockey Edition': { front: cover1Front, back: cover1Back },
+  '58 GSM|Birdie Edition': { front: cover2Front, back: cover2Back },
+  '58 GSM|Forest Edition': { front: cover3Front, back: cover3Back },
+  '58 GSM|Kite Edition': { front: cover4Front, back: cover4Back },
+  '58 GSM|Mountain Edition': { front: cover5Front, back: cover5Back },
+  '58 GSM|Rainbow Edition': { front: cover6Front, back: cover6Back },
 
-  '64 GSM|Sports Edition': { front: gsm64Front, back: gsm64Back },
-  '64 GSM|Nature Edition': { front: gsm64Cover2Front, back: gsm64Cover2Back },
-  '64 GSM|Adventure Edition': { front: gsm64Cover3Front, back: gsm64Cover3Back },
-  '64 GSM|Urban Edition': { front: gsm64Cover4Front, back: gsm64Cover4Back },
-  '64 GSM|Floral Edition': { front: gsm64Cover5Front, back: gsm64Cover5Back },
-  '64 GSM|Abstract Edition': { front: gsm64Cover6Front, back: gsm64Cover6Back },
+  '64 GSM|Football Edition': { front: gsm64Front, back: gsm64Back },
+  '64 GSM|Music Edition': { front: gsm64Cover2Front, back: gsm64Cover2Back },
+  '64 GSM|Paragliding Edition': { front: gsm64Cover3Front, back: gsm64Cover3Back },
+  '64 GSM|Sunset Edition': { front: gsm64Cover4Front, back: gsm64Cover4Back },
+  '64 GSM|Balloon Edition': { front: gsm64Cover5Front, back: gsm64Cover5Back },
+  '64 GSM|Heritage Edition': { front: gsm64Cover6Front, back: gsm64Cover6Back },
 };
 
 gsmTypes.forEach((gsm) => {
   const variants = gsm === '64 GSM' ? pageVariants64 : pageVariants58;
+  const covers = coversPerGsm[gsm];
   covers.forEach((cover) => {
     subjects.forEach((subject) => {
       variants.forEach(({ pages, mrp, price }) => {
@@ -113,35 +117,46 @@ gsmTypes.forEach((gsm) => {
 
 // --- Register Notebook configuration ---
 const registerTypesList = ['All', 'A4 64 GSM', 'Long 64 GSM'];
-const registerCoversList = ['All', 'Cover 1', 'Cover 2', 'Cover 3', 'Cover 4'];
-const registerPagesList = ['All', '150', '200', '300'];
+const registerCoversList = ['All', 'Balloon Edition', 'Rainbow Edition', 'Heritage Edition', 'Mountain Edition'];
+const registerPagesList = ['All', '132', '140', '172', '220', '240'];
 
-const registerPageVariants = [
-  { pages: 150, mrp: 150, price: 120 },
-  { pages: 200, mrp: 200, price: 150 },
-  { pages: 300, mrp: 280, price: 220 },
+const a4RegisterPageVariants = [
+  { pages: 132, mrp: 78, price: 39 },
+  { pages: 172, mrp: 100, price: 50 },
+  { pages: 240, mrp: 135, price: 68 },
+];
+
+const longRegisterPageVariants = [
+  { pages: 140, mrp: 60, price: 30 },
+  { pages: 220, mrp: 90, price: 45 },
 ];
 
 const registerCoverImages = {
-  'A4 64 GSM|Cover 1': { front: a4RegCover1Front, back: a4RegCover1Back },
-  'A4 64 GSM|Cover 2': { front: a4RegCover2Front, back: a4RegCover2Back },
-  'A4 64 GSM|Cover 3': { front: a4RegCover3Front, back: a4RegCover3Back },
-  'A4 64 GSM|Cover 4': { front: a4RegCover4Front, back: a4RegCover4Back },
-  'Long 64 GSM|Cover 1': { front: longRegCover1Front, back: longRegCover1Back },
-  'Long 64 GSM|Cover 2': { front: longRegCover2Front, back: longRegCover2Back },
-  'Long 64 GSM|Cover 3': { front: longRegCover3Front, back: longRegCover3Back },
-  'Long 64 GSM|Cover 4': { front: longRegCover4Front, back: longRegCover4Back },
+  'A4 64 GSM|Balloon Edition': { front: a4RegCover1Front, back: a4RegCover1Back },
+  'A4 64 GSM|Rainbow Edition': { front: a4RegCover2Front, back: a4RegCover2Back },
+  'A4 64 GSM|Heritage Edition': { front: a4RegCover3Front, back: a4RegCover3Back },
+  'A4 64 GSM|Mountain Edition': { front: a4RegCover4Front, back: a4RegCover4Back },
+  'Long 64 GSM|Balloon Edition': { front: longRegCover1Front, back: longRegCover1Back },
+  'Long 64 GSM|Rainbow Edition': { front: longRegCover2Front, back: longRegCover2Back },
+  'Long 64 GSM|Heritage Edition': { front: longRegCover3Front, back: longRegCover3Back },
+  'Long 64 GSM|Mountain Edition': { front: longRegCover4Front, back: longRegCover4Back },
 };
 
 // Generate A4 & Long register products programmatically
 let registerId = 20;
 const generatedRegisterProducts = [];
 const registerNewTypes = ['A4 64 GSM', 'Long 64 GSM'];
-const registerCoversNames = ['Cover 1', 'Cover 2', 'Cover 3', 'Cover 4'];
+const registerCoversNames = ['Balloon Edition', 'Rainbow Edition', 'Heritage Edition', 'Mountain Edition'];
+
+const registerPageVariantsPerType = {
+  'A4 64 GSM': a4RegisterPageVariants,
+  'Long 64 GSM': longRegisterPageVariants,
+};
 
 registerNewTypes.forEach((type) => {
+  const pageVariants = registerPageVariantsPerType[type];
   registerCoversNames.forEach((cover) => {
-    registerPageVariants.forEach(({ pages, mrp, price }) => {
+    pageVariants.forEach(({ pages, mrp, price }) => {
       const images = registerCoverImages[`${type}|${cover}`];
       generatedRegisterProducts.push({
         id: registerId++,
@@ -151,6 +166,7 @@ registerNewTypes.forEach((type) => {
         name: `${type} Register - ${pages} Pages`,
         pages,
         gsm: '64 GSM',
+        dimensions: type === 'A4 64 GSM' ? '21 × 30 cm' : '17 × 27 cm',
         mrp,
         price,
         frontImage: images.front,
@@ -291,8 +307,39 @@ export const getRegularProductsGrouped = (gsm, cover) => {
   return Object.values(grouped).sort((a, b) => a.pages - b.pages);
 };
 
-export const regularGsmTypes = gsmTypes;
-export const regularCovers = covers;
+/**
+ * Returns Regular products grouped by GSM+Cover.
+ * When gsm is 'All', returns 12 groups (2 GSMs × 6 covers).
+ * When gsm is specific, returns 6 groups (1 GSM × 6 covers).
+ * Each group: { key, gsm, cover, products: [all subjects × all page variants] }
+ */
+export const getRegularProductsGroupedByCover = (gsm) => {
+  const filtered = products.filter(
+    (p) => p.category === 'Regular' && (gsm === 'All' || p.gsm === gsm)
+  );
+  const grouped = {};
+  filtered.forEach((product) => {
+    const key = `${product.gsm}|${product.cover}`;
+    if (!grouped[key]) {
+      grouped[key] = { key, gsm: product.gsm, cover: product.cover, products: [] };
+    }
+    grouped[key].products.push(product);
+  });
+
+  const activeGsmTypes = gsm === 'All' ? gsmTypes : [gsm];
+  const result = [];
+  activeGsmTypes.forEach((g) => {
+    const gsmCovers = coversPerGsm[g];
+    gsmCovers.forEach((c) => {
+      const group = grouped[`${g}|${c}`];
+      if (group) result.push(group);
+    });
+  });
+  return result;
+};
+
+export const regularGsmTypes = gsmFilterOptions;
+export const regularCovers = coversPerGsm;
 
 export const registerTypes = registerTypesList;
 export const registerCovers = registerCoversList;
@@ -310,6 +357,33 @@ export const getRegisterProducts = (type, cover, pages) => {
     if (pages !== 'All' && product.pages !== Number(pages)) return false;
     return true;
   });
+};
+
+/**
+ * Returns Register products grouped by type+cover.
+ * Each group: { key, type, cover, products: [sorted by pages ascending] }
+ */
+export const getRegisterProductsGrouped = (type, cover) => {
+  const filtered = products.filter((product) => {
+    if (product.category !== 'Register') return false;
+    if (type !== 'All' && product.type !== type) return false;
+    if (cover !== 'All' && product.cover && product.cover !== cover) return false;
+    return true;
+  });
+
+  const grouped = {};
+  filtered.forEach((product) => {
+    const key = `${product.type}|${product.cover}`;
+    if (!grouped[key]) {
+      grouped[key] = { key, type: product.type, cover: product.cover, products: [] };
+    }
+    grouped[key].products.push(product);
+  });
+
+  return Object.values(grouped).map((group) => ({
+    ...group,
+    products: group.products.sort((a, b) => a.pages - b.pages),
+  }));
 };
 
 export const categories = ['Regular', 'Register'];

@@ -111,6 +111,10 @@
   gap: 2rem;
 }
 
+.notebooks-grid--covers {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 @media (max-width: 768px) {
   .notebook-section {
     padding: 3rem 1rem;
@@ -158,5 +162,15 @@
   .notebooks-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  .notebooks-grid--covers {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .notebooks-grid--covers {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

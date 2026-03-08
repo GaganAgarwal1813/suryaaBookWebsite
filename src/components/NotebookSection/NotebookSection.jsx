@@ -2,13 +2,10 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   getProductsByCategory,
-  getRegularProductsGrouped,
-  getRegisterProducts,
+  getRegularProductsGroupedByCover,
+  getRegisterProductsGrouped,
   regularGsmTypes,
-  regularCovers,
   registerTypes,
-  registerCovers,
-  registerPageOptions
 } from '../../data/products';
 import NotebookCard from '../NotebookCard/NotebookCard';
 import FilterGroup from '../FilterGroup/FilterGroup';
@@ -18,21 +15,13 @@ const NotebookSection = ({ category, sectionId }) => {
   const isRegular = category === 'Regular';
   const isRegister = category === 'Register';
 
-  // Filter state for Regular notebooks
   const [selectedGsm, setSelectedGsm] = useState(regularGsmTypes[0]);
-  const [selectedCover, setSelectedCover] = useState(regularCovers[0]);
 
-  // Filter state for Register notebooks
   const [selectedType, setSelectedType] = useState(registerTypes[0]);
-  const [selectedRegCover, setSelectedRegCover] = useState(registerCovers[0]);
-  const [selectedPages, setSelectedPages] = useState(registerPageOptions[0]);
 
-  // Get the right product list
-  const regularGroups = isRegular ? getRegularProductsGrouped(selectedGsm, selectedCover) : [];
-  const registerProducts = isRegister ? getRegisterProducts(selectedType, selectedRegCover, selectedPages) : [];
+  const regularCoverGroups = isRegular ? getRegularProductsGroupedByCover(selectedGsm) : [];
+  const registerGroups = isRegister ? getRegisterProductsGrouped(selectedType, 'All') : [];
   const otherProducts = (!isRegular && !isRegister) ? getProductsByCategory(category) : [];
-
-  const renderPageLabel = (pages) => (pages === 'All' ? 'All' : `${pages} Pages`);
 
   return (
     <section id={sectionId} className="notebook-section">
@@ -48,13 +37,6 @@ const NotebookSection = ({ category, sectionId }) => {
               onSelect={setSelectedGsm}
               variant="tab"
             />
-            <FilterGroup
-              label="Cover Design"
-              options={regularCovers}
-              selected={selectedCover}
-              onSelect={setSelectedCover}
-              variant="pill"
-            />
           </div>
         )}
 
@@ -67,35 +49,23 @@ const NotebookSection = ({ category, sectionId }) => {
               onSelect={setSelectedType}
               variant="tab"
             />
-            <FilterGroup
-              label="Cover Design"
-              options={registerCovers}
-              selected={selectedRegCover}
-              onSelect={setSelectedRegCover}
-              variant="pill"
-            />
-            <FilterGroup
-              label="Pages"
-              options={registerPageOptions}
-              selected={selectedPages}
-              onSelect={setSelectedPages}
-              variant="pill"
-              renderLabel={renderPageLabel}
-            />
           </div>
         )}
 
-        <div className="notebooks-grid">
+        <div className={`notebooks-grid${(isRegular || isRegister) ? ' notebooks-grid--covers' : ''}`}>
           {isRegular
-            ? regularGroups.map((group) => (
+            ? regularCoverGroups.map((group) => (
                 <NotebookCard
-                  key={`${selectedGsm}-${selectedCover}-${group.pages}`}
-                  variants={group.variants}
+                  key={group.key}
+                  products={group.products}
                 />
               ))
             : isRegister
-              ? registerProducts.map((product) => (
-                  <NotebookCard key={product.id} product={product} />
+              ? registerGroups.map((group) => (
+                  <NotebookCard
+                    key={group.key}
+                    products={group.products}
+                  />
                 ))
               : otherProducts.map((product) => (
                   <NotebookCard key={product.id} product={product} />
