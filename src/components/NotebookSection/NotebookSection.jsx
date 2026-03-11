@@ -6,6 +6,7 @@ import {
   regularGsmTypes,
   registerTypes,
 } from '../../data/products';
+import { isFullCatalogActive } from '../../utils/catalogDate';
 import NotebookCard from '../NotebookCard/NotebookCard';
 import FilterGroup from '../FilterGroup/FilterGroup';
 import './NotebookSection.css';
@@ -13,12 +14,14 @@ import './NotebookSection.css';
 const NotebookSection = ({ category, sectionId }) => {
   const isRegular = category === 'Regular';
   const isRegister = category === 'Register';
+  const fullCatalog = isFullCatalogActive();
 
   const [selectedGsm, setSelectedGsm] = useState(regularGsmTypes[0]);
 
   const [selectedType, setSelectedType] = useState(registerTypes[0]);
 
-  const regularCoverGroups = isRegular ? getRegularProductsGroupedByCover(selectedGsm) : [];
+  const effectiveGsm = isRegular && !fullCatalog ? '58 GSM' : selectedGsm;
+  const regularCoverGroups = isRegular ? getRegularProductsGroupedByCover(effectiveGsm) : [];
   const registerGroups = isRegister ? getRegisterProductsGrouped(selectedType, 'All') : [];
 
   return (
@@ -26,7 +29,7 @@ const NotebookSection = ({ category, sectionId }) => {
       <div className="section-container">
         <h2 className="section-title">{category} Notebooks</h2>
 
-        {isRegular && (
+        {isRegular && fullCatalog && (
           <div className="filter-controls">
             <FilterGroup
               label="Paper Quality"

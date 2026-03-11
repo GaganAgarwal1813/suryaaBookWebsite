@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { scrollToElement } from '../../utils/scrollToElement';
+import { isFullCatalogActive } from '../../utils/catalogDate';
 import { STORE_NAME } from '../../constants/business';
 import OrderBanner from '../OrderBanner/OrderBanner';
 import logo from '../../assets/Logo.jpeg';
@@ -39,7 +40,9 @@ const Header = () => {
 
         <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
           <button onClick={() => handleNavClick('regular')}>Regular</button>
-          <button onClick={() => handleNavClick('register')}>Register</button>
+          {isFullCatalogActive() && (
+            <button onClick={() => handleNavClick('register')}>Register</button>
+          )}
         </nav>
 
         <div className="header-actions">
